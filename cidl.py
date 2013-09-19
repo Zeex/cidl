@@ -124,13 +124,13 @@ class Parameter(object):
       return False
     return Attribute(name) in self._attrlist
 
-  def get_attr(self, name):
+  def get_attr(self, name, default=None):
     if self._attrlist is None:
-      return None
+      return Attribute(name, default)
     try:
       return self._attrlist[self._attrlist.index(Attribute(name))]
     except ValueError:
-      return None
+      return Attribute(name, default)
 
   @property
   def is_in(self):
@@ -203,13 +203,13 @@ class Function(object):
       return False
     return Attribute(name) in self._attrlist
 
-  def get_attr(self, name):
+  def get_attr(self, name, default=None):
     if self._attrlist is None:
-      return None
+      return Attribute(name, default)
     try:
       return self._attrlist[self._attrlist.index(Attribute(name))]
     except ValueError:
-      return None
+      return Attribute(name, default)
 
   def __eq__(self, other):
     if isinstance(other, basestring):
