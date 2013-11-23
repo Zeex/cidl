@@ -17,6 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import codecs
 import os
 import ply.lex
 import ply.yacc
@@ -92,7 +93,7 @@ class Attribute(object):
     return self._value
 
   def __eq__(self, other):
-    if isinstance(other, basestring):
+    if isinstance(other, str):
       return self._name == other
     return self._name == other._name
 
@@ -381,22 +382,22 @@ class Parser(object):
 
   def t_ECHAR(self, t):
     r'\\[abfnrtv\'"\\?]'
-    t.value = t.value[1:-1].decode('string-escape')
+    t.value = codecs.decode(t.value[1:-1], 'unicode_escape')
     return t
 
   def t_ACHAR(self, t):
     r'\'\\x[0-9a-fA-F]{2}\''
-    t.value = t.value[1:-1].decode('string-escape')
+    t.value = codecs.decode(t.value[1:-1], 'unicode_escape')
     return t
 
   def t_UCHAR(self, t):
     r'\'\\x[0-9a-fA-F]{4}\''
-    t.value = t.value[1:-1].decode('unicode-escape')
+    t.value = codecs.decode(t.value[1:-1], 'unicode_escape')
     return t
 
   def t_STRING(self, t):
     r'\"(.|\n)*?\"'
-    t.value = t.value[1:-1].decode('unicode-escape')
+    t.value = codecs.decode(t.value[1:-1], 'unicode_escape')
     t.lineno += t.value.count('\n')
     return t
 
@@ -639,8 +640,8 @@ class Parser(object):
 if __name__ == '__main__':
   parser = Parser()
   for f in sys.argv[1:]:
-    print 'Parsing \'%s\'...' % f
+    print('Parsing \'%s\'...'  % f)
     try:
       unit = parser.parse(open(f).read())
     except Error as e:
-      print e
+      print(e)
