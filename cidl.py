@@ -31,7 +31,7 @@ except NameError:
 class Value(object):
   def __init__(self, type, data):
     self._type = type
-    self._data = data 
+    self._data = data
 
   @property
   def type(self):
@@ -69,7 +69,7 @@ class Value(object):
   # ASCII escape (\xXX)
   def is_achar(self):
     return self._type == 'achar'
-  
+
   # Unicode escape (\uXXXX)
   def is_uchar(self):
     return self._type == 'uchar'
@@ -434,7 +434,7 @@ class Parser(object):
   t_RPAREN   = r'\)'
   t_LBRACKET = r'\['
   t_RBRACKET = r'\]'
-    
+
   t_EQUALS = r'='
 
   t_COMMA     = r','
@@ -448,7 +448,7 @@ class Parser(object):
   def p_text(self, p):
     """text :
             | code"""
-       
+
   def p_code(self, p):
     """code : stat SEMICOLON
             | stat SEMICOLON code"""
@@ -617,7 +617,7 @@ class Parser(object):
       try:
         open(path, 'w')
         os.remove(path)
-      except OSError:
+      except (OSError, IOError):
         return filename
       return path
 
