@@ -612,25 +612,16 @@ class Parser(object):
     self._constlist = []
     self._funclist = []
 
-    def choose_path(filename):
-      path = os.path.join(os.path.dirname(__file__), filename)
-      try:
-        open(path, 'w')
-        os.remove(path)
-      except (OSError, IOError):
-        return filename
-      return path
-
     self._lexer = ply.lex.lex(
       object=self,
-      lextab=choose_path('cidl_lextab')
+      lextab='cidl_lextab'
     )
 
     self._parser = ply.yacc.yacc(
       module=self,
       errorlog=Logger(),
-      debugfile=choose_path('cidl_parser.out'),
-      tabmodule=choose_path('cidl_parsetab')
+      debugfile='cidl_parser.out',
+      tabmodule='cidl_parsetab'
     )
 
   def token(self):
