@@ -614,6 +614,7 @@ class Parser(object):
 
     self._lexer = ply.lex.lex(
       object=self,
+      optimize=True,
       lextab='cidl_lextab'
     )
 
