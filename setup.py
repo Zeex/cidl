@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
   name='cidl',
-  version='1.0.2',
+  version='1.0.3',
   author='Zeex',
   author_email='zeex@rocketmail.com',
   url='https://github.com/Zeex/cidl',
