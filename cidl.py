@@ -580,7 +580,7 @@ class Parser(object):
     if len(p) == 3:
       p[0] = self._param_class(p[1], p[2])
     elif len(p) == 5:
-      p[0] = self_.param_class(p[1], p[2], default=p[4])
+      p[0] = self._param_class(p[1], p[2], default=p[4])
     elif len(p) == 4:
       p[0] = self._param_class(p[2], p[3], attrlist=p[1])
     elif len(p) == 6:
